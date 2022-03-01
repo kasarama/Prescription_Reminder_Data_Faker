@@ -1,5 +1,5 @@
 # Prescription_Reminder_Data_Faker
-Faker is a servise that populates projects database
+Faker is a servise that populates system database
 
 
 ## How to populate database :
