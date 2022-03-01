@@ -35,6 +35,11 @@ public class Pharmacist {
     public Pharmacist() {
     }
 
+    public Pharmacist(Person cpr, Pharmacy pharmacy) {
+        this.cpr = cpr;
+        this.pharmacy = pharmacy;
+    }
+
     public Long getId() {
         return id;
     }
@@ -78,5 +83,9 @@ public class Pharmacist {
 
     public Collection<Handout> getHandoutList() {
         return handoutList;
+    }
+
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 }

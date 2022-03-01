@@ -26,7 +26,7 @@ public class Person implements Serializable {
     private String firstName;
     @NotNull
     private String lastName;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private ContactInformation ci;
     @Temporal(TemporalType.DATE)

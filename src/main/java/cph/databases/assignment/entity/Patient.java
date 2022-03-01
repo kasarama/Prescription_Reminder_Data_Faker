@@ -33,6 +33,10 @@ public class Patient {
     public Patient() {
     }
 
+    public Patient(Person cpr) {
+        this.cpr = cpr;
+    }
+
     // Getters and setters
     public Long getId() {
         return id;

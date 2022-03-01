@@ -11,7 +11,7 @@ public class ContactInformation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     //@JoinColumn(name = "person_id", referencedColumnName = "cpr")
     private Person pcpr;
 

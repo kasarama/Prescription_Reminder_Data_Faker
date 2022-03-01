@@ -13,7 +13,7 @@ public class Pharmacy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Collection<Handout> handoutList = new ArrayList<>();
     @NotNull
     private String address;
@@ -51,5 +51,13 @@ public class Pharmacy {
 
     public Collection<Pharmacist> getEmployees() {
         return employees;
+    }
+
+    public void addEmployee (Pharmacist pharmacist) {
+        this.employees.add(pharmacist);
+        if(pharmacist.getPharmacy()== null){
+            pharmacist.setPharmacy(this);
+        }
+
     }
 }

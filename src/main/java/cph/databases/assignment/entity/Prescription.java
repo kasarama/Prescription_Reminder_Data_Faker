@@ -3,7 +3,8 @@ package cph.databases.assignment.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -68,10 +69,9 @@ public class Prescription {
         this.remainingHandouts--;
     }
 
-    //todo test this
     public void invalidate() {
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        Date yesterdayDate = java.sql.Timestamp.valueOf(String.valueOf(yesterday));
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+        Date yesterdayDate = Date.from(yesterday.atZone(ZoneId.systemDefault()).toInstant());
         this.validUntil = yesterdayDate;
     }
 
