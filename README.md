@@ -7,10 +7,11 @@ Faker is a servise that populates system database
 #### CSV files require access permission
 
 ### To populate database with funcions and appi run all the scripts from sql/person_population and from sql/5000_drugs.sql, sql/address.sql
-### Run populate_person() until you get desired amount of records in person table
-### When the amount of data in person table is satisfying, remove comment tags in PrescriptionReminderApplication.java
-### Run api and wait for output "FAKER is DONE"
-### Terminate api
+#### Run populate_person() until you get desired amount of records in person table
+#### When the amount of data in person table is satisfying, remove comment tags in PrescriptionReminderApplication.java
+##### Keep in mind that the number af records is proportional to the number of rows in person table
+#### Run api and wait for output "FAKER is DONE"
+#### Terminate api
 
 
   
