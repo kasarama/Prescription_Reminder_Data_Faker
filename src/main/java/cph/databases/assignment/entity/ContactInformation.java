@@ -13,7 +13,7 @@ public class ContactInformation implements Serializable {
 
     @OneToOne()
     //@JoinColumn(name = "person_id", referencedColumnName = "cpr")
-    private Person pcpr;
+    private Person person;
 
     private String mail;
 
@@ -27,8 +27,8 @@ public class ContactInformation implements Serializable {
     public ContactInformation() {
     }
 
-    public ContactInformation(Person pcpr, String mail, int phone, Address addr) {
-        this.pcpr = pcpr;
+    public ContactInformation(Person person, String mail, int phone, Address addr) {
+        this.person = person;
         this.mail = mail;
         this.phone = phone;
         this.addr = addr;
@@ -47,12 +47,12 @@ public class ContactInformation implements Serializable {
         this.id = id;
     }
 
-    public Person getPcpr() {
-        return pcpr;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPcpr(Person pcpr) {
-        this.pcpr = pcpr;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getMail() {
