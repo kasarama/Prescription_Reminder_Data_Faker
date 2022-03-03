@@ -20,6 +20,7 @@ public class DataFaker {
     private static PharmacistRepo pharmacistRepo;
     private static PatientRepo patientRepo;
     private static ContactRepo contactRepo;
+    private static PrescriptionRepo prescRepo;
     private static Helepr helper = new Helepr();
     private static Random random = new Random();
     private static List<Address> addressList;
@@ -28,7 +29,7 @@ public class DataFaker {
     @Autowired
     public DataFaker(DoseRepo doseRepo, DrugRepo drugRepo, PersonRepo personRepo, DoctorRepo doctorRepo,
                      AddressRepo addressRepo, PharmacyRepo pharmacyRepo, PharmacistRepo pharmacistRepo,
-                     PatientRepo patientRepo, ContactRepo contactRepo) {
+                     PatientRepo patientRepo, ContactRepo contactRepo, PrescriptionRepo prescRepo) {
         this.doseRepo = doseRepo;
         this.drugRepo = drugRepo;
         this.personRepo = personRepo;
@@ -38,6 +39,7 @@ public class DataFaker {
         this.pharmacistRepo = pharmacistRepo;
         this.patientRepo = patientRepo;
         this.contactRepo = contactRepo;
+        this.prescRepo = prescRepo;
         this.addressList = (List<Address>) addressRepo.findAll();
 
 
@@ -262,6 +264,51 @@ public class DataFaker {
         int list_size = addressList.size();
         int rand_index = random.nextInt(list_size);
         return addressList.get(rand_index);
+    }
+
+
+    public static String prescriptions(int quant) {
+        List<Doctor> doctors = (List<Doctor>) doctorRepo.findAll();
+
+        List<Dose> doses = (List<Dose>) doseRepo.findAll();
+        Exception e = new Exception("Person with cpr %s does not exist in DB");
+        int all_pat = (int) patientRepo.count();
+
+        int counter = 0;
+
+        while (counter < quant) {
+            long rand_index = (long) random.nextInt(all_pat) + 1;
+            try {
+                Patient patient = patientRepo.findById(rand_index).orElseThrow(() -> e);
+
+                for (int i = 0; i < random.nextInt(5) + 1; i++) {
+
+
+                    Doctor doctor = doctors.get(random.nextInt(doctors.size()));
+                    Dose dose = doses.get(random.nextInt(doctors.size()));
+                    LocalDateTime tr_start = LocalDateTime.now().minusDays(random.nextInt(50) + 2);
+                    LocalDateTime tr_end = LocalDateTime.now().plusDays(random.nextInt(50) + 2);
+                    LocalDateTime valid = LocalDateTime.now().plusDays(random.nextInt(20));
+
+
+                    Date start_date = Date.from(tr_start.atZone(ZoneId.systemDefault()).toInstant());
+                    Date end_date = Date.from(tr_end.atZone(ZoneId.systemDefault()).toInstant());
+                    Date valid_date = Date.from(valid.atZone(ZoneId.systemDefault()).toInstant());
+                    int remaining_handouts = random.nextInt(6);
+
+                    boolean subst = random.nextBoolean();
+
+                    Prescription pres = new Prescription(patient, dose, doctor, remaining_handouts, start_date, end_date, valid_date, subst);
+                    prescRepo.save(pres);
+                }
+
+                counter++;
+            } catch (Exception ex) {
+                System.out.println("Patient with index : " + rand_index + " not found");
+            }
+        }
+
+        return "Added more than " + counter;
     }
 
 }

@@ -50,7 +50,7 @@ public class Prescription {
     }
 
 
-    public Prescription(Patient patient, Dose dose, Doctor doctor, int remainingHandouts, Date treatmentStart, Date treatmentEnd, Date validUntil, String dosage, boolean substitutionAllowed) {
+    public Prescription(Patient patient, Dose dose, Doctor doctor, int remainingHandouts, Date treatmentStart, Date treatmentEnd, Date validUntil, boolean substitutionAllowed) {
         this.patient = patient;
         this.dose = dose;
         this.doctor = doctor;
@@ -58,7 +58,7 @@ public class Prescription {
         this.treatmentStart = treatmentStart;
         this.treatmentEnd = treatmentEnd;
         this.validUntil = validUntil;
-        this.dosage = dosage;
+
         this.substitutionAllowed = substitutionAllowed;
     }
 
